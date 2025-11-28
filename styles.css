@@ -1,0 +1,62 @@
+/* GLOBAL THEME */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Inter', sans-serif;
+    color: #1E293B;
+}
+
+/* SIDEBAR */
+[data-testid="stSidebar"] {
+    background-color: #F8FAFC;
+    border-right: 1px solid #E2E8F0;
+}
+
+/* CARDS (METRICS) */
+[data-testid="stMetric"] {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+[data-testid="stMetric"]:hover {
+    transform: translateY(-2px);
+    border-color: #0E7490; /* Teal-700 */
+}
+
+/* HEADERS */
+h1, h2, h3 {
+    color: #0E7490; /* Teal Brand Color */
+    font-weight: 700;
+}
+
+/* BUTTONS */
+.stButton > button {
+    background-color: #0E7490;
+    color: white;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 4px 14px 0 rgba(14, 116, 144, 0.39);
+}
+
+.stButton > button:hover {
+    background-color: #155E75;
+    color: white;
+}
+
+/* DATAFRAME/TABLES */
+[data-testid="stDataFrame"] {
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* CUSTOM ALERTS */
+.stAlert {
+    border-radius: 10px;
+}
