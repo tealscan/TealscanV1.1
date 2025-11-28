@@ -5,3 +5,5 @@ pymupdf
 pdfminer.six
 pyxirr
 numpy
+streamlit-lottie
+requests
