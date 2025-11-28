@@ -1,0 +1,7 @@
+streamlit
+pandas
+casparser
+pymupdf
+pdfminer.six
+pyxirr
+numpy
