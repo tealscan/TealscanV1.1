@@ -8,82 +8,137 @@ from streamlit_lottie import st_lottie
 
 # --- 1. CONFIGURATION ---
 st.set_page_config(
-    page_title="TealScan: Wealth X-Ray",
+    page_title="TealScan",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# --- 2. INJECT POWERUP STYLE (Tailwind CSS) ---
+# --- 2. THE "POWERUP" THEME (Native CSS) ---
 st.markdown("""
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Import Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
-        
-        /* Global Overrides */
-        body { font-family: 'Manrope', sans-serif !important; background-color: #F8FAFC; }
-        .stApp { background-color: #F8FAFC; }
-        
-        /* Hide Streamlit Bloat */
-        #MainMenu, footer, header {visibility: hidden;}
-        div[data-testid="stToolbar"] {visibility: hidden;}
-        
-        /* Custom Classes */
-        .hero-text {
-            background: linear-gradient(135deg, #0F172A 0%, #334155 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .teal-accent { color: #0D9488; }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid #E2E8F0;
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
-            border-radius: 24px;
-        }
-        
-        .feature-card {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            border: 1px solid #F1F5F9;
-            transition: all 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            border-color: #0D9488;
-        }
+<style>
+    /* IMPORT FONTS */
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+    
+    /* GLOBAL VARIABLES */
+    :root {
+        --primary: #0F766E;
+        --accent: #14B8A6;
+        --bg-color: #F8FAFC;
+        --text-dark: #1E293B;
+    }
 
-        /* Upload Box Override */
-        div[data-testid="stFileUploader"] {
-            padding: 1.5rem;
-            border: 2px dashed #CBD5E1;
-            background: #F8FAFC;
-            border-radius: 12px;
-        }
-        
-        /* Button Override */
-        div.stButton > button {
-            background: #0D9488;
-            color: white;
-            font-weight: 600;
-            border-radius: 12px;
-            padding: 0.75rem 2rem;
-            border: none;
-            width: 100%;
-            box-shadow: 0 4px 6px -1px rgba(13, 148, 136, 0.3);
-        }
-        div.stButton > button:hover {
-            background: #0F766E;
-            box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.4);
-            transform: translateY(-2px);
-        }
-    </style>
+    /* GLOBAL RESET */
+    .stApp {
+        background-color: var(--bg-color);
+        font-family: 'Manrope', sans-serif;
+    }
+    
+    /* HIDE STREAMLIT ELEMENTS */
+    #MainMenu, footer, header {visibility: hidden;}
+    div[data-testid="stToolbar"] {visibility: hidden;}
+
+    /* --- HERO SECTION STYLES --- */
+    .hero-container {
+        padding: 4rem 1rem;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: #0F172A;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-span {
+        background: linear-gradient(135deg, #0F766E 0%, #2DD4BF 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .hero-desc {
+        font-size: 1.25rem;
+        color: #475569;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+    
+    /* --- FLOATING UPLOAD CARD --- */
+    .upload-card-container {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 24px;
+        box-shadow: 0 20px 40px -10px rgba(15, 118, 110, 0.15);
+        border: 1px solid #E2E8F0;
+    }
+    
+    /* Override Streamlit Uploader */
+    div[data-testid="stFileUploader"] {
+        padding: 1.5rem;
+        border: 2px dashed #CBD5E1;
+        background-color: #F8FAFC;
+        border-radius: 12px;
+    }
+    
+    /* --- METRICS & CARDS --- */
+    .feature-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 16px;
+        border: 1px solid #F1F5F9;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        height: 100%;
+        text-align: left;
+    }
+    
+    .icon-box {
+        width: 48px;
+        height: 48px;
+        background: #F0FDFA;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* --- BUTTONS --- */
+    div.stButton > button {
+        background: #0F766E;
+        color: white;
+        border-radius: 12px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border: none;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(15, 118, 110, 0.3);
+    }
+    div.stButton > button:hover {
+        background: #115E59;
+        transform: translateY(-2px);
+    }
+    
+    /* --- NAVBAR --- */
+    .navbar {
+        display: flex;
+        align-items: center;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid #E2E8F0;
+        margin-bottom: 2rem;
+    }
+    
+    .brand {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #0F172A;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+</style>
 """, unsafe_allow_html=True)
 
 # --- 3. HELPER FUNCTIONS ---
@@ -101,12 +156,6 @@ def parse_pdf(file, pwd):
         return casparser.read_cas_pdf("temp.pdf", pwd, force_pdfminer=True)
     except: return None
 
-def get_asset_class(name):
-    n = name.upper()
-    if any(x in n for x in ["LIQUID", "DEBT", "BOND", "OVERNIGHT"]): return "Debt"
-    if "GOLD" in n: return "Gold"
-    return "Equity"
-
 def get_fund_rating(xirr_val):
     if xirr_val is None: return "N/A"
     if xirr_val >= 20.0: return "🔥 IN-FORM"
@@ -114,68 +163,74 @@ def get_fund_rating(xirr_val):
     elif 0.0 < xirr_val < 12.0: return "⚠️ OFF-TRACK"
     else: return "❌ OUT-OF-FORM"
 
-# --- 4. APP LOGIC ---
+def get_asset_class(name):
+    n = name.upper()
+    if any(x in n for x in ["LIQUID", "DEBT", "BOND", "OVERNIGHT"]): return "Debt"
+    if "GOLD" in n: return "Gold"
+    return "Equity"
 
-# Navbar (Visual Only)
+# --- 4. UI LOGIC ---
+
+if "data" not in st.session_state: st.session_state.data = None
+
+# HEADER / NAVBAR
 st.markdown("""
-<div class="flex justify-between items-center py-4 px-2 mb-10 border-b border-slate-100">
-    <div class="flex items-center gap-2">
-        <span class="text-2xl">⚡</span>
-        <span class="text-xl font-bold text-slate-900 tracking-tight">TealScan</span>
+<div class="navbar">
+    <div class="brand">
+        <span style="color:#0F766E">⚡</span> TealScan
     </div>
-    <div class="text-xs font-semibold bg-teal-50 text-teal-700 px-3 py-1 rounded-full">
+    <div style="margin-left: auto; font-size: 0.85rem; font-weight: 600; color: #0F766E; background: #F0FDFA; padding: 6px 16px; border-radius: 20px;">
         BETA v1.0
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-if "data" not in st.session_state: st.session_state.data = None
-
 # ==========================================
-# SCENARIO A: LANDING PAGE
+# SCENARIO A: LANDING PAGE (NO DATA)
 # ==========================================
 if st.session_state.data is None:
-    
-    # --- HERO SECTION ---
-    c1, c2 = st.columns([1.5, 1], gap="large")
-    
-    with c1:
+
+    col1, col2 = st.columns([1.5, 1], gap="large")
+
+    with col1:
         st.markdown("""
-        <div class="mt-4">
-            <span class="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold mb-4 border border-blue-100">
-                🚀 Trusted by 10,000+ Investors
-            </span>
-            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-slate-900">
-                Stop Losing <span class="teal-accent">1% Wealth</span><br>Every Year.
-            </h1>
-            <p class="text-lg text-slate-500 mb-8 leading-relaxed max-w-lg">
-                Hidden commissions in "Regular" mutual funds eat <b>40% of your corpus</b> over 20 years. 
-                Upload your CAS statement to audit your portfolio in 30 seconds.
-            </p>
-            
-            <div class="flex gap-8 border-t border-slate-100 pt-8">
+        <div class="hero-container">
+            <div style="font-size: 0.85rem; font-weight: 700; color: #0F766E; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">
+                Trusted by 10,000+ Investors
+            </div>
+            <div class="hero-title">
+                Your Portfolio,<br>
+                <span class="hero-span">Totally Naked.</span>
+            </div>
+            <div class="hero-desc">
+                Hidden commissions eat <b>40% of your wealth</b> over 20 years. 
+                Our bank-grade X-Ray engine finds the leaks in 30 seconds.
+            </div>
+            <div style="display: flex; gap: 2rem;">
                 <div>
-                    <p class="text-3xl font-bold text-slate-900">₹50 Cr+</p>
-                    <p class="text-sm text-slate-500 font-medium">Assets Analyzed</p>
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #0F172A;">₹100 Cr+</div>
+                    <div style="font-size: 0.85rem; color: #64748B;">Assets Analyzed</div>
                 </div>
                 <div>
-                    <p class="text-3xl font-bold text-slate-900">100%</p>
-                    <p class="text-sm text-slate-500 font-medium">Private & Secure</p>
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #0F172A;">100%</div>
+                    <div style="font-size: 0.85rem; color: #64748B;">Private & Secure</div>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-    with c2:
-        # FLOATING UPLOAD CARD
-        st.markdown('<div class="glass-card p-6 md:p-8 mt-6">', unsafe_allow_html=True)
-        st.markdown('<h3 class="text-xl font-bold text-slate-900 mb-1">Start Free Audit</h3>', unsafe_allow_html=True)
-        st.markdown('<p class="text-sm text-slate-500 mb-6">Upload detailed CAS PDF (CAMS/KFintech)</p>', unsafe_allow_html=True)
+    with col2:
+        # THE FLOATING CARD
+        st.markdown('<div class="upload-card-container">', unsafe_allow_html=True)
+        st.markdown('<h3 style="margin:0; font-size:1.5rem; color:#0F172A;">Run Free Audit</h3>', unsafe_allow_html=True)
+        st.markdown('<p style="color:#64748B; font-size:0.9rem; margin-bottom:1.5rem;">Upload CAMS/KFintech CAS (PDF)</p>', unsafe_allow_html=True)
         
-        f_file = st.file_uploader("Upload CAS", type="pdf", label_visibility="collapsed")
-        f_pass = st.text_input("PDF Password", type="password", placeholder="PAN Number (e.g. ABCDE1234F)")
+        f_file = st.file_uploader("Upload PDF", type="pdf", label_visibility="collapsed")
+        f_pass = st.text_input("Password", type="password", placeholder="PAN (e.g. ABCDE1234F)", label_visibility="collapsed")
         
-        if st.button("Run X-Ray Scan ➔"):
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        if st.button("Start X-Ray Scan ➔", type="primary"):
             if f_file and f_pass:
                 with st.spinner("Decrypting & Analyzing..."):
                     data = parse_pdf(f_file, f_pass)
@@ -186,54 +241,50 @@ if st.session_state.data is None:
                         st.error("Invalid File or Password.")
         
         st.markdown("""
-        <div class="mt-4 flex items-center justify-center gap-2 text-xs text-slate-400">
-            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-            No data stored. Browser-only analysis.
+        <div style="text-align: center; margin-top: 1rem; font-size: 0.75rem; color: #94A3B8;">
+            🔒 Data processed locally in browser memory.
         </div>
         </div>
         """, unsafe_allow_html=True)
 
-    # --- FEATURES BENTO GRID ---
-    st.markdown("""
-    <div class="py-20">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-slate-900">Bank-Grade Analysis</h2>
-            <p class="text-slate-500 mt-2">Everything you need to fix your portfolio.</p>
+    # FEATURES GRID
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color:#0F172A;'>Bank-Grade Analysis Features</h2>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    f1, f2, f3 = st.columns(3)
+    with f1:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="icon-box">🕵️</div>
+            <div style="font-weight:700; margin-bottom:0.5rem;">Commission Hunter</div>
+            <div style="color:#64748B; font-size:0.9rem;">Instantly spots 'Regular' plans draining your returns.</div>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="feature-card">
-                <div class="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center text-2xl mb-4">🕵️‍♂️</div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">Commission Hunter</h3>
-                <p class="text-slate-500 text-sm">Instantly spots 'Regular' plans draining your returns.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-2xl mb-4">📈</div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">True XIRR Engine</h3>
-                <p class="text-slate-500 text-sm">Calculates real time-weighted returns, not just absolute gains.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-2xl mb-4">🛡️</div>
-                <h3 class="text-lg font-bold text-slate-900 mb-2">Health Check</h3>
-                <p class="text-slate-500 text-sm">Auto-tags funds as 'In-Form' or 'Out-of-Form'.</p>
-            </div>
+        """, unsafe_allow_html=True)
+    with f2:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="icon-box">📈</div>
+            <div style="font-weight:700; margin-bottom:0.5rem;">True XIRR Engine</div>
+            <div style="color:#64748B; font-size:0.9rem;">Calculates real time-weighted returns, not just absolute gains.</div>
         </div>
-    </div>
-    
-    <div class="text-center text-slate-400 text-sm py-8 border-t border-slate-100">
-        TealScan Pro © 2025 • Made with ❤️ in India
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
+    with f3:
+        st.markdown("""
+        <div class="feature-card">
+            <div class="icon-box">🛡️</div>
+            <div style="font-weight:700; margin-bottom:0.5rem;">Health Check</div>
+            <div style="color:#64748B; font-size:0.9rem;">Auto-tags funds as 'In-Form' or 'Out-of-Form'.</div>
+        </div>
+        """, unsafe_allow_html=True)
 
 # ==========================================
-# SCENARIO B: DASHBOARD
+# SCENARIO B: DASHBOARD (DATA LOADED)
 # ==========================================
 else:
     data = st.session_state.data
     
-    # --- LOGIC ENGINE ---
+    # Process Data
     portfolio = []
     total_val = 0
     total_invested = 0
@@ -246,14 +297,11 @@ else:
             cost = float(scheme.valuation.cost or 0)
             if val < 100: continue
             
-            # Asset Class
+            # Logic
             cat = get_asset_class(name)
-            
-            # Commission
             is_regular = "DIRECT" not in name.upper()
             loss = val * 0.01 if is_regular else 0
             
-            # XIRR
             dates, amts = [], []
             for txn in scheme.transactions:
                 amt = float(txn.amount or 0)
@@ -262,7 +310,6 @@ else:
                 if any(x in desc for x in ["PURCHASE", "SIP"]): amts.append(amt * -1)
                 else: amts.append(amt)
                 dates.append(txn.date)
-            
             dates.append(date.today())
             amts.append(val)
             
@@ -287,27 +334,26 @@ else:
 
     df = pd.DataFrame(portfolio)
 
-    # --- DASHBOARD UI ---
+    # DASHBOARD UI
     st.button("← Scan New File", on_click=lambda: st.session_state.pop("data"))
     
     # Header Card
     st.markdown(f"""
-    <div class="bg-slate-900 text-white p-8 rounded-3xl mb-8 shadow-2xl relative overflow-hidden">
-        <div class="relative z-10 flex justify-between items-end">
+    <div style="background: #1E293B; color: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
             <div>
-                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Net Worth</p>
-                <h1 class="text-4xl md:text-5xl font-bold">₹{total_val:,.0f}</h1>
+                <div style="color: #94A3B8; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Net Worth</div>
+                <div style="font-size: 3rem; font-weight: 700;">₹{total_val:,.0f}</div>
             </div>
-            <div class="text-right">
-                <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-2">Commission Loss</p>
-                <p class="text-2xl font-bold text-red-400">₹{commission_loss:,.0f}<span class="text-sm text-slate-500">/yr</span></p>
+            <div style="text-align: right;">
+                <div style="color: #94A3B8; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Commission Loss</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #F87171;">₹{commission_loss:,.0f}<span style="font-size:0.9rem; color:#64748B;"> /yr</span></div>
             </div>
         </div>
-        <div class="absolute top-0 right-0 w-64 h-64 bg-teal-500 rounded-full mix-blend-overlay filter blur-3xl opacity-20 -mr-16 -mt-16"></div>
     </div>
     """, unsafe_allow_html=True)
     
-    # Metrics Grid
+    # Metrics
     m1, m2, m3, m4 = st.columns(4)
     gain = total_val - total_invested
     m1.metric("Total Gain", f"₹{gain:,.0f}", f"{(gain/total_invested)*100:.1f}%" if total_invested else "0%")
@@ -317,17 +363,13 @@ else:
     
     st.divider()
     
-    # Detailed Analysis
     c1, c2 = st.columns([2, 1])
     
     with c1:
         st.subheader("🏥 Fund Health Card")
         st.dataframe(
             df[["Fund", "Type", "Rating", "XIRR"]],
-            column_config={
-                "XIRR": st.column_config.NumberColumn(format="%.2f%%"),
-                "Type": st.column_config.TextColumn("Plan Type"),
-            },
+            column_config={"XIRR": st.column_config.NumberColumn(format="%.2f%%")},
             use_container_width=True,
             hide_index=True
         )
@@ -336,11 +378,10 @@ else:
         st.subheader("🍰 Asset Allocation")
         if not df.empty:
             alloc = df.groupby("Category")["Value"].sum().reset_index()
-            st.bar_chart(alloc, x="Category", y="Value", color="#0D9488")
-
-    # Final Action
+            st.bar_chart(alloc, x="Category", y="Value", color="#0F766E")
+            
     if commission_loss > 0:
-        st.error(f"⚠️ **Action Required:** You are losing ₹{commission_loss:,.0f}/yr. Switch to Direct Plans.")
+        st.error(f"⚠️ **Action Required:** You are losing ₹{commission_loss:,.0f}/yr in commissions. Switch to Direct Plans.")
     else:
         st.balloons()
         st.success("✅ **Clean Portfolio:** You are a smart investor! No hidden fees detected.")
