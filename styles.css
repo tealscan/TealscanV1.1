@@ -1,62 +1,92 @@
-/* GLOBAL THEME */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+/* IMPORT MODERN FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
 
-html, body, [class*="css"] {
+/* GLOBAL LIGHT THEME VARIABLES */
+:root {
+    --primary-color: #0E7490; /* Deep Teal */
+    --accent-color: #06B6D4; /* Bright Teal for gradients */
+    --bg-color: #F8FAFC; /* Slate 50 (Very light grey) */
+    --text-color: #0F172A; /* Slate 900 (Deep Navy/Black) */
+    --card-bg: #FFFFFF;
+    --border-color: #E2E8F0;
+}
+
+/* BACKGROUND & TEXT */
+.stApp {
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family: 'Inter', sans-serif;
-    color: #1E293B;
 }
 
-/* SIDEBAR */
-[data-testid="stSidebar"] {
-    background-color: #F8FAFC;
-    border-right: 1px solid #E2E8F0;
+/* HIDE STREAMLIT BRANDING */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+/* HERO TYPOGRAPHY (Clean & Bold) */
+h1 {
+    font-weight: 800 !important;
+    font-size: 3rem !important;
+    color: #1E293B !important;
+    letter-spacing: -1px;
+    margin-bottom: 10px !important;
 }
 
-/* CARDS (METRICS) */
-[data-testid="stMetric"] {
-    background-color: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    padding: 20px;
+h2, h3 {
+    color: #334155 !important; /* Slate 700 */
+    font-weight: 600 !important;
+}
+
+/* MODERN WHITE CARDS (PowerUp Style) */
+div[data-testid="stMetric"], div.css-1r6slb0 {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); /* Soft shadow */
+    transition: transform 0.2s ease;
 }
 
-[data-testid="stMetric"]:hover {
+div[data-testid="stMetric"]:hover {
     transform: translateY(-2px);
-    border-color: #0E7490; /* Teal-700 */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 
-/* HEADERS */
-h1, h2, h3 {
-    color: #0E7490; /* Teal Brand Color */
-    font-weight: 700;
+/* UPLOAD BOX STYLING */
+div[data-testid="stFileUploader"] {
+    background-color: #FFFFFF;
+    border: 1px dashed #94A3B8;
+    border-radius: 12px;
+    padding: 30px;
 }
 
-/* BUTTONS */
-.stButton > button {
-    background-color: #0E7490;
+/* BUTTONS (Gradient Teal) */
+div.stButton > button {
+    background: linear-gradient(135deg, #0E7490 0%, #0891B2 100%);
     color: white;
-    border-radius: 8px;
-    padding: 12px 24px;
-    font-weight: 600;
     border: none;
-    box-shadow: 0 4px 14px 0 rgba(14, 116, 144, 0.39);
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(14, 116, 144, 0.3);
+    transition: all 0.2s;
 }
 
-.stButton > button:hover {
-    background-color: #155E75;
-    color: white;
+div.stButton > button:hover {
+    box-shadow: 0 10px 15px -3px rgba(14, 116, 144, 0.4);
+    transform: translateY(-1px);
 }
 
 /* DATAFRAME/TABLES */
-[data-testid="stDataFrame"] {
-    border: 1px solid #E2E8F0;
-    border-radius: 12px;
-    overflow: hidden;
+div[data-testid="stDataFrame"] {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: white;
 }
 
-/* CUSTOM ALERTS */
+/* ALERTS */
 .stAlert {
-    border-radius: 10px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
